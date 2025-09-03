@@ -1,0 +1,27 @@
+I want to generate a complete Selenium + Java + BDD + POM test automation framework from a UI screenshot. The AI should analyze the screenshot and automatically generate:
+ 
+✅ Page Object classes with @FindBy annotations for all UI elements.
+✅ Step Definitions that utilize all methods and variables from the Page Object classes.
+✅ Feature files with dynamic test scenarios (positive and negative) inferred from the UI.
+✅ Multiple Page Object classes, Step Definitions, and Feature files based on the UI components.
+✅ Extent Reports integration for test reporting.
+✅ Cross-browser support (Chrome and Firefox) via config.properties.
+✅ Implicit waits of 20 seconds to avoid flaky tests.
+✅ A config.properties file
+✅ A pom.xml with dependencies for:
+ 
+Selenium 4.24.0
+WebDriverManager 5.9.2
+Cucumber Java & JUnit
+Extent Reports
+✅ The project structure must follow MNC/product-based company standards:
+ 
+src/main/java/pages
+src/main/java/utils
+src/test/java/stepdefinitions
+src/test/java/runners
+src/test/java/hooks
+src/test/resources/features
+src/test/resources/config
+src/test/resources/testdata
+✅ The output should be a ZIP file with complete working logic, ready to run without manual changes.
