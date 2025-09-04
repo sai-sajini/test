@@ -1,3 +1,35 @@
+
+Generate a complete Selenium + Java + BDD + POM test automation framework for any web application's UI. The framework must:
+
+Create Page Object classes with @FindBy annotations for all UI elements on each page.
+Implement Step Definitions that utilize all Page Object methods and variables.
+Generate Feature files with both positive and negative scenarios, inferred from the UI and business logic.
+Include multiple Page Object classes, Step Definitions, and Feature files as needed for all UI components and flows.
+Integrate Extent Reports for test reporting, using the latest compatible Cucumber adapter (e.g., tech.grasshopper:extentreports-cucumber7-adapter).
+Support cross-browser testing (at least Chrome and Firefox) via a configuration file.
+Use implicit waits to avoid flaky tests.
+Provide a configuration file with browser, URL, and report path settings.
+Provide a pom.xml with dependencies for:
+Selenium (latest stable version)
+WebDriverManager (latest stable version)
+Cucumber Java & JUnit
+Extent Reports
+ExtentReports Cucumber7 adapter (tech.grasshopper:extentreports-cucumber7-adapter)
+Use a professional, scalable project structure:
+pages
+utils
+stepdefinitions
+runners
+hooks
+features
+config
+testdata
+Ensure the framework is ready to run with no manual changes required.
+Handle any UI popups or overlays that may block interactions.
+Ensure all error message assertions match the actual UI output.
+
+________________________________________________________________________________________________________________________________________
+
 I want to generate a complete Selenium + Java + BDD + POM test automation framework from a UI screenshot. The AI should analyze the screenshot and automatically generate:
  
 ✅ Page Object classes with @FindBy annotations for all UI elements.
