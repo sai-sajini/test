@@ -1,3 +1,7 @@
+https://github.com/kavitharun12/RestAPI.git
+
+
+
 Create a REST Assured API testing framework with Cucumber BDD for a Spring Boot REST API that manages products. The API has the following endpoints:
 
 Base URL: http://localhost:8080
