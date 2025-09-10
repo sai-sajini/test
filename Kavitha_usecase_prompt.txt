@@ -1,0 +1,56 @@
+Create a REST Assured API testing framework with Cucumber BDD for a Spring Boot REST API that manages products. The API has the following endpoints:
+
+Base URL: http://localhost:8080
+Endpoints:
+- GET /api/products - Get all products
+- GET /api/products/{id} - Get product by ID
+- POST /api/products - Create new product
+- PUT /api/products/{id} - Update product
+- DELETE /api/products/{id} - Delete product
+
+Product model:
+{
+    "id": Long,
+    "name": String,
+    "description": String,
+    "price": double
+}
+
+Requirements:
+1. Use Java 21
+2. Use Maven for dependency management
+3. Include the following frameworks/libraries:
+   - REST Assured for API testing
+   - Cucumber for BDD
+   - JUnit 5 for test execution
+   - Lombok for reducing boilerplate
+   - Jackson for JSON processing
+
+4. Create the following project structure:
+   - src/test/java/com/example/
+     - config/ (REST Assured configuration)
+     - model/ (POJO classes)
+     - steps/ (Cucumber step definitions)
+     - CucumberTestRunner.java
+
+5. Include Cucumber features for:
+   - Creating a new product
+   - Getting all products
+   - Getting a specific product
+   - Updating a product
+   - Deleting a product
+
+6. Add proper assertions and validations
+7. Generate HTML and JSON reports
+8. Include proper error handling
+9. Use Spring dependency injection
+10. Add logging for request/response on validation failures
+
+Please provide all necessary files including:
+1. pom.xml with all dependencies
+2. Configuration files
+3. Model classes
+4. Step definitions
+5. Feature files
+6. Test runner
+7. Properties files
