@@ -1,0 +1,12 @@
+S.No.,RC Category,Description
+1,Change Failure,"Poorly planned, untested, or miscommunicated changes (code, infra, config) causing instability."
+2,Capacity & Scalability Limitations,Systems overwhelmed due to traffic/load beyond expected thresholds or poorly sized resources.
+3,Software Defects/Limitation,"Bugs or regressions in application code, services, or dependencies introduced during development.  Note: If this is defect introduced as part of a recent change then this is a Change Failure."
+4,Infrastructure or Platform Failures,"Outages or faults in servers, cloud providers, storage, networking, or container orchestration layers."
+5,Configuration Errors,"Misconfigured settings (e.g. feature flags, secrets, thresholds) impacting runtime behaviour.  Note, if the act of changing the configuration was the cause of the issue, then this is a Change Failure."
+6,External Dependencies,"Third-party service failures (APIs, cloud services, CDNs, etc.) affecting availability or performance."
+7,Operational Process Issues,"Manual errors, insufficient runbooks, or poor incident response processes."
+8,Security Incidents,"DDoS attacks, unauthorised access, or other security events disrupting service."
+9,Data Integrity & State Issues,"Corrupted, lost, or inconsistent data causing cascading failures or system instability."
+10,Root Cause Undetermined / Still Under Investigation,Early in the investigation or postmortem — incident symptoms observed but no definitive technical root cause yet identified.
+"Additionally, for issues in 3rd Party host managed services then we should record top-level category of “External Dependencies” with a “Party” field indicating the 3rd Party, and the underlying classification of the cause of the 3rd Party incident recorded in a separate field using the same list.",,
