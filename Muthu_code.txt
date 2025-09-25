@@ -1,0 +1,108 @@
+Delay in Foods Final Order/Batch issue
+Duplicate ASNs
+Foods Logistics
+NDC Allocations Impact
+RDC Allocations Impact
+Inflated Orders
+NDC Allocations
+Frozen Allocations
+Open Pos
+Blue Yonder Issue
+Order plan issues
+Pricing issues
+NDC/Ambient Allocations
+RDC/Depot Allocations
+Open Text Issue
+FIND application issue
+SRD Ranging Issue
+Foods Platform Unavailability
+
+import pandas as pd
+from sklearn.decomposition import NMF
+from sklearn.feature_extraction.text import TfidfVectorizer
+from transformers import pipeline
+
+# -----------------------
+# CONFIG
+# -----------------------
+USE_HF_AUTOLABEL = True  # <- toggle this flag for auto-suggestions
+
+# Predefined candidate categories for Hugging Face
+CANDIDATE_LABELS = [
+    "Database", "Network", "Authentication",
+    "UI", "Server", "Configuration", "Other"
+]
+
+# -----------------------
+# STEP 1: PREPARE DATA
+# -----------------------
+# Example: load incidents from CSV
+df = pd.read_csv("incident_dump.csv", encoding="ISO-8859-1")  # must have a column 'description'
+texts = df["Description"].dropna().tolist()
+
+# Vectorize
+vectorizer = TfidfVectorizer(max_features=1000, stop_words="english")
+X = vectorizer.fit_transform(texts)
+
+# Fit Topic Model (NMF)
+n_topics = 5
+nmf = NMF(n_components=n_topics, random_state=42)
+W = nmf.fit_transform(X)
+H = nmf.components_
+
+feature_names = vectorizer.get_feature_names_out()
+
+# -----------------------
+# STEP 2: TOPIC WORDS
+# -----------------------
+def get_top_words(H, feature_names, n_top_words=10):
+    topics = []
+    for topic_idx, topic in enumerate(H):
+        top_features = [feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]
+        topics.append(top_features)
+    return topics
+
+topics = get_top_words(H, feature_names)
+
+# -----------------------
+# STEP 3: OPTIONAL HF AUTOLABEL
+# -----------------------
+classifier = None
+if USE_HF_AUTOLABEL:
+    classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")  # mistralai/Mistral-7B-Instruct-v0.2
+
+def auto_label_topic(top_words):
+    """Return HuggingFace auto-suggested label for topic keywords."""
+    if not USE_HF_AUTOLABEL:
+        return None
+    text = " ".join(top_words)
+    result = classifier(text, CANDIDATE_LABELS)
+    return result["labels"][0]  # best candidate
+
+# -----------------------
+# STEP 4: MANUAL LABELLING LOOP
+# -----------------------
+topic_labels = {}
+
+print("\n==== TOPIC LABELLING ====\n")
+for idx, top_words in enumerate(topics):
+    print(f"\nTopic {idx} keywords: {', '.join(top_words)}")
+
+    suggested = None
+    if USE_HF_AUTOLABEL:
+        suggested = auto_label_topic(top_words)
+        print(f" Suggested label: {suggested}")
+
+    label = input(f"Enter category label (or press Enter to accept '{suggested}'): ").strip()
+    if not label:
+        label = suggested if suggested else f"Topic_{idx}"
+
+    topic_labels[idx] = label
+
+# -----------------------
+# STEP 5: SAVE LABELS
+# -----------------------
+labels_df = pd.DataFrame(list(topic_labels.items()), columns=["topic_id", "category"])
+labels_df.to_csv("topic_labels.csv", index=False)
+
+print("\n✅ Labelling complete! Saved to topic_labels.csv")
