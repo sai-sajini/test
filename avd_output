@@ -1,0 +1,44 @@
+User: I am facing a delay in my night batches. Do you anything about this?
+
+Bot: Based on the provided context, here is a structured analysis of similar historical issues and their details:
+
+When it Happened Previously?
+Incident 1 (PIR - INC90624297/PBI71510):
+
+Date: July 10, 2021
+Description: Delay in processing batch impacting NDC allocations at the Foods Bradford DC.
+Incident 2:
+
+Date: April 22, 2021
+Description: Delay in the overnight Quantum batch due to a job failure.
+Possible Root Cause (RC) for This Issue:
+Incident 1:
+
+A new process in the ASO system was introduced to merge batches, which expected allocations from Quantum within 30 minutes.
+Due to an overnight job failure in Quantum, allocations were delayed, leading to missed processing timelines.
+The root cause was identified as insufficient testing during configuration.
+Incident 2:
+
+Failure of the Quantum job responsible for processing inventory transaction lists (ITLs) caused a significant delay.
+This failure was due to duplicate records in the ITL table.
+Possible Resolution:
+Incident 1:
+
+Manual intervention to trigger allocations to downstream systems.
+Time limit for automatic order transmissions extended to 120 minutes, with instructions to manually trigger orders via Standard Operating Procedures (SOPs).
+Consider automatic triggers to prevent manual dependency.
+A permanent fix was deployed to resolve testing insufficiencies.
+Incident 2:
+
+A hotfix was applied to handle duplicates in the ITL table.
+Investigation into the root cause of duplicates continued, and a permanent fix was included in the Greedo Release (June 28, 2021).
+Recommendations for Current Issue:
+Immediate Actions:
+
+Verify if the issue relates to either a job failure in the Quantum system or manual triggers in ASO.
+Cross-check logs for quantum batch failures or duplicate records if applicable.
+Follow-up Solution Directions:
+
+Ensure there is a clear SOP to handle manual triggers, if required.
+Review whether recent job or configuration changes align with historical issues that caused delays.
+If the details of your current issue do not align with the historical cases described, please provide additional specific details or context to assist further.
